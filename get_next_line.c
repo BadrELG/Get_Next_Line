@@ -6,15 +6,33 @@
 /*   By: bael-gho <bael-gho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:03:45 by bael-gho          #+#    #+#             */
-/*   Updated: 2025/06/15 14:27:23 by bael-gho         ###   ########.fr       */
+/*   Updated: 2025/06/15 15:07:57 by bael-gho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char *read(int fd, char *left_c, char *buffer)
+static char *read(int fd, char *stash, char *buffer)
 {
-    
+    int	bytes_read;
+
+	bytes_read = 1;
+	while (!(ft_strchr(stash, '\n') && bytes_read > 0))
+	{
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read == -1)
+		{
+			free(buffer);
+			free(stash);
+			return (NULL);
+		}
+		else if (bytes_read ==0)
+			break;
+		stash = ft_strjoin(stash, buffer);
+		if (!stash)
+			return (NULL);
+	}
+	return (stash);
 }
 
 static char *clean(char *line)
