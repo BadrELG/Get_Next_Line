@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bael-gho <bael-gho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:03:45 by bael-gho          #+#    #+#             */
-/*   Updated: 2025/07/21 02:24:03 by bael-gho         ###   ########.fr       */
+/*   Updated: 2025/07/21 02:21:05 by bael-gho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*read_line(int fd, char *stash, char *buffer)
 {
@@ -62,24 +62,24 @@ char	*get_next_line(int fd)
 {
 	char		*result;
 	char		*buffer;
-	static char	*stash;
+	static char	*stash[1024];
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		if (stash)
+		if (stash[fd])
 		{
-			free(stash);
-			stash = NULL;
+			free(stash[fd]);
+			stash[fd] = NULL;
 		}
 		return (NULL);
 	}
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
-		return (free(stash), NULL);
-	result = read_line(fd, stash, buffer);
+		return (free(stash[fd]), NULL);
+	result = read_line(fd, stash[fd], buffer);
 	free(buffer);
 	if (!result)
 		return (NULL);
-	stash = clean(result);
+	stash[fd] = clean(result);
 	return (result);
 }

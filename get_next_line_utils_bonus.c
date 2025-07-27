@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bael-gho <bael-gho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:03:47 by bael-gho          #+#    #+#             */
-/*   Updated: 2025/07/20 23:49:18 by bael-gho         ###   ########.fr       */
+/*   Updated: 2025/07/21 03:18:13 by bael-gho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *str)
 {
@@ -83,7 +83,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	s3 = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!s3)
+	{
 		return (free(s1), NULL);
+	}
 	i = -1;
 	while (s1[++i])
 		s3[i] = s1[i];
