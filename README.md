@@ -45,4 +45,4 @@ La partie bonus permet de gérer plusieurs descripteurs de fichiers simultanéme
 - BadrELG
 
 ## Licence
-Ce projet est développé dans le cadre d'un cursus d'apprentissage de la programmation.
+Ce projet est développé dans le cadre d'un cursus d'apprentissage de 42.
